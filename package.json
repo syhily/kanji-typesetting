@@ -1,7 +1,7 @@
 {
   "name": "kanji-typesetting",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A JavaScript library for Japanese/Chinese typography and typesetting",
   "author": "syhily",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
+      "types": "./types/main.d.ts",
       "import": "./dist/main.js",
       "require": "./dist/main.cjs"
     },
@@ -32,7 +32,8 @@
   "types": "./dist/main.d.ts",
   "files": [
     "LICENSE",
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "dev": "vite",
@@ -48,6 +49,7 @@
     "eslint-plugin-format": "^1.0.2",
     "jiti": "^2.6.1",
     "jsdom": "^27.1.0",
+    "rollup-plugin-copy": "^3.5.0",
     "sass-embedded": "^1.93.3",
     "typescript": "~5.9.3",
     "vite": "npm:rolldown-vite@7.2.2",
