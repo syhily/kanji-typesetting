@@ -28,5 +28,5 @@ export default class Han {
   condition: any
   routine: string[]
   setRoutine(routine: any): this
-  render(routine: any): this
+  render(routine?: any): this
 }
