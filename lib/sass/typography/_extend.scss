@@ -1,0 +1,319 @@
+@use 'var';
+
+$_default-variant: if(var.$han-default-variant ==hans, var.$han-glyph-set-hans, var.$han-glyph-set-hant);
+
+// **
+// * Functions
+// **
+@function han-biaodian($generic: Sans, $set: Pro) {
+  @if ($set ==simp) {
+    @return 'Biaodian ' + $generic;
+  }
+
+  @return 'Biaodian Pro ' + if($set ==Pro, $generic, $generic + ' ' + $set);
+}
+
+@function han-typeface($typeface: 'Han Heiti', $set: default, $pre: null) {
+  $typeface: if($set ==default, $typeface, $typeface + ' ' + $set);
+  @return if($pre ==null or $pre == '', $typeface, ($pre, $typeface));
+}
+
+%han-cursive {
+  font-family: var.$han-serif, han-typeface('Han Kaiti', $_default-variant, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-hant {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hant), 'Numeral LF Serif', var.$han-serif, 'Zhuyin Kaiti',
+    han-typeface('Han Kaiti', var.$han-glyph-set-hant, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-hant-nu {
+  font-family:
+    'Numeral LF Serif', var.$han-serif, han-typeface('Han Kaiti', var.$han-glyph-set-hant, var.$han-cursive-zh),
+    cursive, serif;
+}
+
+%han-cursive-hans {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hans), 'Numeral LF Serif', var.$han-serif,
+    han-typeface('Han Kaiti', var.$han-glyph-set-hans, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-hans-nu {
+  font-family:
+    'Numeral LF Serif', var.$han-serif, han-typeface('Han Kaiti', var.$han-glyph-set-hans, var.$han-cursive-zh),
+    cursive, serif;
+}
+
+%han-cursive-ja {
+  font-family: 'Yakumono Serif', 'Noto Serif CJK JP', 'Numeral LF Serif', var.$han-serif, cursive, serif;
+}
+
+%han-cursive-ja-nu {
+  font-family: 'Numeral LF Serif', 'Noto Serif CJK JP', var.$han-serif, cursive, serif;
+}
+
+/**
+ * Cursive Italic
+ */
+%han-cursive-italic {
+  font-family:
+    'Latin Italic Serif', var.$han-serif, han-typeface('Han Kaiti', $_default-variant, var.$han-cursive-zh), cursive,
+    serif;
+}
+
+%han-cursive-italic-hant {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hant), 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    'Zhuyin Kaiti', han-typeface('Han Kaiti', var.$han-glyph-set-hant, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-italic-hant-nu {
+  font-family:
+    'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Kaiti', var.$han-glyph-set-hant, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-italic-hans {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hans), 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Kaiti', var.$han-glyph-set-hans, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-italic-hans-nu {
+  font-family:
+    'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Kaiti', var.$han-glyph-set-hans, var.$han-cursive-zh), cursive, serif;
+}
+
+%han-cursive-italic-ja {
+  font-family: 'Yakumono Serif', 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif, cursive, serif;
+}
+
+%han-cursive-italic-ja-nu {
+  font-family: 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif, cursive, serif;
+}
+
+%han-mono {
+  font-family:
+    var.$han-mono, han-typeface('Han Heiti', $_default-variant, var.$han-mono-zh), monospace, monospace, sans-serif;
+}
+
+%han-mono-hant {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hant), var.$han-mono, 'Zhuyin Heiti',
+    han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-mono-zh), monospace, monospace, sans-serif;
+}
+
+%han-mono-hant-nu {
+  font-family:
+    var.$han-mono, han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-mono-zh), monospace, monospace,
+    sans-serif;
+}
+
+%han-mono-hans {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hans), var.$han-mono,
+    han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-mono-zh), monospace, monospace, sans-serif;
+}
+
+%han-mono-hans-nu {
+  font-family:
+    var.$han-mono, han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-mono-zh), monospace, monospace,
+    sans-serif;
+}
+
+%han-mono-ja {
+  font-family: 'Yakumono Sans', var.$han-mono, monospace, monospace, sans-serif;
+}
+
+%han-mono-ja-nu {
+  font-family: var.$han-mono, monospace, monospace, sans-serif;
+}
+
+%han-sans {
+  font-family: var.$han-sans, han-typeface('Han Heiti', $_default-variant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-hant {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hant),
+    //'Numeral LF Sans',
+    var.$han-sans,
+    'Zhuyin Heiti',
+    han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-sans-zh),
+    sans-serif;
+}
+
+%han-sans-hant-nu {
+  font-family: var.$han-sans, han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-hans {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hans),
+    //'Numeral LF Sans',
+    var.$han-sans,
+    han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-sans-zh),
+    sans-serif;
+}
+
+%han-sans-hans-nu {
+  font-family: var.$han-sans, han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-ja {
+  font-family:
+    'Yakumono Sans',
+    //'Numeral LF Sans',
+    var.$han-sans,
+    sans-serif;
+}
+
+%han-sans-ja-nu {
+  font-family: var.$han-sans, sans-serif;
+}
+
+/**
+ * Sans Italic
+ */
+%han-sans-italic {
+  font-family:
+    'Latin Italic Sans', var.$han-sans, han-typeface('Han Heiti', $_default-variant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-hant {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hant), 'Latin Italic Sans', var.$han-sans, 'Zhuyin Heiti',
+    han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-hant-nu {
+  font-family:
+    'Latin Italic Sans', var.$han-sans, han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-hant-nu {
+  font-family:
+    'Latin Italic Sans', var.$han-sans, han-typeface('Han Heiti', var.$han-glyph-set-hant, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-hans {
+  font-family:
+    han-biaodian(Sans, var.$han-biaodian-hans), 'Latin Italic Sans', var.$han-sans,
+    han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-hans-nu {
+  font-family:
+    'Latin Italic Sans', var.$han-sans, han-typeface('Han Heiti', var.$han-glyph-set-hans, var.$han-sans-zh), sans-serif;
+}
+
+%han-sans-italic-ja {
+  font-family: 'Yakumono Sans', 'Latin Italic Sans', var.$han-sans, sans-serif;
+}
+
+%han-sans-italic-ja-nu {
+  font-family: 'Latin Italic Sans', var.$han-sans, sans-serif;
+}
+
+%han-serif {
+  font-family: var.$han-serif, han-typeface('Han Songti', $_default-variant, var.$han-serif-zh), cursive, serif;
+}
+
+%han-serif-hant {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hant), 'Numeral LF Serif', var.$han-serif, 'Zhuyin Kaiti',
+    han-typeface('Han Songti', var.$han-glyph-set-hant, var.$han-serif-zh), serif;
+}
+
+%han-serif-hant-nu {
+  font-family:
+    'Numeral LF Serif', var.$han-serif, han-typeface('Han Songti', var.$han-glyph-set-hant, var.$han-serif-zh), serif;
+}
+
+%han-serif-hans {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hans), 'Numeral LF Serif', var.$han-serif,
+    han-typeface('Han Songti', var.$han-glyph-set-hans, var.$han-serif-zh), serif;
+}
+
+%han-serif-hans-nu {
+  font-family:
+    'Numeral LF Serif', var.$han-serif, han-typeface('Han Songti', var.$han-glyph-set-hans, var.$han-serif-zh), serif;
+}
+
+%han-serif-ja {
+  font-family: 'Yakumono Serif', 'Noto Serif CJK JP', 'Numeral LF Serif', var.$han-serif, serif;
+}
+
+%han-serif-ja-nu {
+  font-family: 'Noto Serif CJK JP', 'Numeral LF Serif', var.$han-serif, serif;
+}
+
+/**
+ * Serif Italic
+ */
+%han-serif-italic {
+  font-family:
+    'Latin Italic Serif', var.$han-serif, han-typeface('Han Songti', $_default-variant, var.$han-serif-zh), cursive,
+    serif;
+}
+
+%han-serif-italic-hant {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hant), 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    'Zhuyin Kaiti', han-typeface('Han Songti', var.$han-glyph-set-hant, var.$han-serif-zh), cursive, serif;
+}
+
+%han-serif-italic-hant-nu {
+  font-family:
+    'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Songti', var.$han-glyph-set-hant, var.$han-serif-zh), cursive, serif;
+}
+
+%han-serif-italic-hans {
+  font-family:
+    han-biaodian(Serif, var.$han-biaodian-hans), 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Songti', var.$han-glyph-set-hans, var.$han-serif-zh), cursive, serif;
+}
+
+%han-serif-italic-hans-nu {
+  font-family:
+    'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif,
+    han-typeface('Han Songti', var.$han-glyph-set-hans, var.$han-serif-zh), cursive, serif;
+}
+
+%han-serif-italic-ja {
+  font-family:
+    'Yakumono Serif', 'Noto Serif CJK JP', 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif, cursive,
+    serif;
+}
+
+%han-serif-italic-ja-nu {
+  font-family: 'Noto Serif CJK JP', 'Numeral LF Italic Serif', 'Latin Italic Serif', var.$han-serif, cursive, serif;
+}
+
+%han-ligature {
+  -moz-font-feature-settings: 'liga';
+  -ms-font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+}
+
+// We do not need the `locl` property of OpenType typefaces,
+// for we have better fallback mechanism in Han.css.
+// (*Internal use with Source Han Sans only)
+%han-no-locl {
+  -moz-font-feature-settings: 'liga=1, locl=0';
+  -ms-font-feature-settings:
+    'liga',
+    'locl' 0;
+  -webkit-font-feature-settings:
+    'liga',
+    'locl' 0;
+  font-feature-settings:
+    'liga',
+    'locl' 0;
+}

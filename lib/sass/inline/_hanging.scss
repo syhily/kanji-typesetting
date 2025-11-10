@@ -1,0 +1,70 @@
+@use '../locale/mixin';
+@use '../typography/var';
+@use '../var/default';
+@use '../var/internal';
+
+@font-face {
+  src: internal.$han-webfont;
+  font-family: 'Han Space';
+  unicode-range: U+20;
+}
+
+@if (default.$han-hanging-hant == false) {
+  #{internal.$hanging-hant} {
+    h-cs,
+    h-cs[hidden] {
+      // box-model
+      display: inline;
+      visibility: inherit;
+      // typography
+      font-family: inherit;
+      font-size: inherit;
+    }
+  }
+}
+
+h-cs.hangable-outer,
+h-cs.hangable-outer[hidden] {
+  display: inline;
+  font: 1em 'Han Space';
+
+  @if (default.$han-hanging-hant == false) {
+    &:lang(zh-Hant),
+    &:lang(zh-TW),
+    &:lang(zh-HK) {
+      display: none;
+    }
+  }
+}
+
+#{internal.$han-hanging-selector} {
+  // positioning
+  position: relative;
+
+  &:after {
+    display: none !important;
+  }
+  &:before {
+    // box-model
+    display: inline !important;
+    // typography
+    content: ' ';
+    font:
+      1em 'Han Space',
+      var.$han-mono;
+  }
+  > h-inner {
+    @include mixin.han-typo-reset();
+    // positioning
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    // box-model
+    display: inline-block;
+
+    ruby &,
+    h-ru & {
+      position: relative;
+    }
+  }
+}

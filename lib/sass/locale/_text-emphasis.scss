@@ -1,0 +1,161 @@
+@use 'const';
+
+@function han-mark-to-code($mark, $shape: filled) {
+  $ret: $mark;
+
+  @if ($shape == filled) {
+    @if ($mark == circle) {
+      $ret: '\25cf';
+    }
+    @if ($mark == sesame) {
+      $ret: '\fe45';
+    }
+    @if ($mark == dot) {
+      $ret: '\2022';
+    }
+    @if ($mark == double-circle) {
+      $ret: '\25c9';
+    }
+    @if ($mark == triangle) {
+      $ret: '\25b2';
+    }
+  }
+
+  @if ($shape == open) {
+    @if ($mark == circle) {
+      $ret: '\25cb';
+    }
+    @if ($mark == sesame) {
+      $ret: '\fe46';
+    }
+    @if ($mark == dot) {
+      $ret: '\25e6';
+    }
+    @if ($mark == double-circle) {
+      $ret: '\25ce';
+    }
+    @if ($mark == triangle) {
+      $ret: '\25b3';
+    }
+  }
+  @return $ret;
+}
+
+@mixin han-calc($prop, $exp) {
+  #{$prop}: -moz-calc(#{$exp});
+  #{$prop}: -webkit-calc(#{$exp});
+  #{$prop}: calc(#{$exp});
+}
+
+@mixin han-scale($size, $origin: 'left top') {
+  -moz-transform: scale($size);
+  -ms-transform: scale($size);
+  -webkit-transform: scale($size);
+  transform: scale($size);
+  -moz-transform-origin: #{$origin};
+  -ms-transform-origin: #{$origin};
+  -webkit-transform-origin: #{$origin};
+  transform-origin: #{$origin};
+}
+
+@mixin han-scale-center($size) {
+  -moz-transform: scale($size);
+  -ms-transform: scale($size);
+  -webkit-transform: scale($size);
+  transform: scale($size);
+}
+
+@mixin han-typo-reset {
+  @include han-text-emphasis-internal(none);
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  text-decoration: none;
+  text-indent: 0;
+}
+
+@mixin han-text-emphasis-internal(
+  $posi: const.$HAN-TEXT-EMPHASIS-POSI,
+  $mark: const.$HAN-TEXT-EMPHASIS-MARK,
+  $shape: const.$HAN-TEXT-EMPHASIS-SHAPE,
+  $color: const.$HAN-TEXT-EMPHASIS-COLOR
+) {
+  @if ($posi == none) {
+    $mark: none;
+    $shape: null;
+  }
+
+  @if ($mark != null or $shape != null) {
+    -moz-text-emphasis: $shape $mark;
+    -webkit-text-emphasis: $shape $mark;
+    text-emphasis: $shape $mark;
+  }
+  @if ($posi != null and $posi != none) {
+    -moz-text-emphasis-position: $posi;
+    -webkit-text-emphasis-position: $posi;
+    text-emphasis-position: $posi;
+  }
+  @if ($color != null and $color != inherit) {
+    -moz-text-emphasis-color: $color;
+    -webkit-text-emphasis-color: $color;
+    text-emphasis-color: $color;
+  }
+}
+
+@mixin han-text-emphasis-pf(
+  $posi: const.$HAN-TEXT-EMPHASIS-POSI,
+  $mark: const.$HAN-TEXT-EMPHASIS-MARK,
+  $shape: const.$HAN-TEXT-EMPHASIS-SHAPE,
+  $color: const.$HAN-TEXT-EMPHASIS-COLOR,
+  $skip: const.$HAN-TEXT-EMPHASIS-SKIP,
+  $extend: true
+) {
+  @if ($extend) {
+    @extend %han-text-emphasis-pf !optional;
+  }
+  @if ($extend and $skip) {
+    @extend %han-text-emphasis-skip !optional;
+  }
+
+  @if ($posi == under) {
+    $posi: 1em;
+  }
+  @if ($posi == over) {
+    $posi: -0.7em;
+  }
+
+  $mark: han-mark-to-code($mark, $shape);
+
+  .textemphasis & {
+    @extend %han-need-no-jinze !optional;
+  }
+
+  .no-textemphasis & h-char:after {
+    @if ($posi != null) {
+      margin-top: $posi;
+    }
+    @if ($mark != null and $mark != '') {
+      content: $mark;
+    }
+    @if ($color != null and $color != inherit) {
+      color: $color;
+    }
+  }
+
+  @if ($extend == false and $skip == false) {
+    h-char.punct,
+    h-char.biaodian {
+      @include han-text-emphasis-internal(null, inherit, null, null);
+
+      .no-textemphasis &:after {
+        @if ($mark == null) {
+          $mark: '\25cf';
+          @if ($shape == open) {
+            $mark: '\25cb';
+          }
+        }
+        content: $mark !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@use '../api';
+@use '../locale/const';
+@use '../var/default';
+
+/**
+ * Customized emphasis mark (着重號)
+ */
+em:lang(zh) {
+  $posi: null;
+  $mark: null;
+  $shape: null;
+  $color: null;
+  $skip: default.$han-text-emphasis-skip;
+
+  @if (
+    default.$han-text-emphasis-mark
+      !=const.$HAN-TEXT-EMPHASIS-MARK or
+      default.$han-text-emphasis-shape
+      !=const.$HAN-TEXT-EMPHASIS-SHAPE
+  ) {
+    $mark: default.$han-text-emphasis-mark;
+    $shape: default.$han-text-emphasis-shape;
+  }
+
+  @if (default.$han-text-emphasis-posi !=const.$HAN-TEXT-EMPHASIS-POSI) {
+    $posi: default.$han-text-emphasis-posi;
+  }
+
+  @if (default.$han-text-emphasis-color !=const.$HAN-TEXT-EMPHASIS-COLOR) {
+    $color: default.$han-text-emphasis-color;
+  }
+
+  @include api.han-text-emphasis($posi, $mark, $shape, $color, $skip, false);
+}
+
+em:lang(ja) {
+  $posi: null;
+  $mark: null;
+  $shape: null;
+  $color: null;
+  $skip: default.$han-text-emphasis-skip;
+
+  @if (
+    default.$han-text-emphasis-mark-ja
+      !=const.$HAN-TEXT-EMPHASIS-MARK-JA or
+      default.$han-text-emphasis-shape-ja
+      !=const.$HAN-TEXT-EMPHASIS-SHAPE-JA
+  ) {
+    $mark: default.$han-text-emphasis-mark-ja;
+    $shape: default.$han-text-emphasis-shape-ja;
+  }
+
+  @if (default.$han-text-emphasis-posi-ja !=const.$HAN-TEXT-EMPHASIS-POSI-JA) {
+    $posi: default.$han-text-emphasis-posi-ja;
+  }
+
+  @if (default.$han-text-emphasis-color-ja !=const.$HAN-TEXT-EMPHASIS-COLOR-JA) {
+    $color: default.$han-text-emphasis-color-ja;
+  }
+
+  @include api.han-text-emphasis($posi, $mark, $shape, $color, $skip, false);
+}

@@ -1,0 +1,30 @@
+@use 'locale/text-emphasis' as mixin;
+
+@function han-header-i($max: 1, $min: 6) {
+  $ret: '';
+  @for $i from $max through $min {
+    @if ($i != $min) {
+      $ret: $ret + 'h' + $i + ', ';
+    } @else {
+      $ret: $ret + 'h' + $i;
+    }
+  }
+  @return $ret;
+}
+
+@mixin han-text-emphasis($posi: under, $mark: circle, $shape: filled, $color: inherit, $skip: true, $extend: true) {
+  @include mixin.han-text-emphasis-internal($posi, $mark, $shape, $color);
+  @include mixin.han-text-emphasis-pf($posi, $mark, $shape, $color, $skip, $extend);
+}
+
+@mixin han-section-counter($toc: false) {
+  & {
+    @extend %han-section-counter;
+  }
+
+  @if ($toc) {
+    ol.toc {
+      @extend %han-toc-counter;
+    }
+  }
+}

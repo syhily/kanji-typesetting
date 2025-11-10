@@ -1,0 +1,127 @@
+@use 'sass:meta';
+@use 'const';
+@use 'mixin';
+
+// * Address a preciser adjacent underlined text run
+// * with JS rendered.
+// *
+%han-reset-adjacent-deco-line {
+  margin-left: auto;
+}
+
+#{const.$HAN-JS-RENDERED-CLASS} {
+  u,
+  ins {
+    & + u,
+    & + ins {
+      @extend %han-reset-adjacent-deco-line !optional;
+    }
+
+    &.adjacent {
+      @extend %han-adjacent-deco-line !optional;
+    }
+  }
+
+  s,
+  del {
+    & + s,
+    & + del {
+      @extend %han-reset-adjacent-deco-line !optional;
+
+      &.adjacent {
+        @extend %han-adjacent-deco-line !optional;
+      }
+    }
+  }
+}
+
+// * - Polyfill implementation for Firefox and IE;
+// * - Remove emphasis mark under punctuation.
+// *
+// * 1. Polyfill for browsers that support no `text-emphasis`.
+// * 2. Although han is a project for normalization and
+// *    fonts ain't supposed to be assigned specifically,
+// *    we need the emphasis marks to fallback properly;
+// *    hence, one exception is hereby made.
+// * 3. Skip emphasis mark while under punctuation.
+// *
+%han-need-no-jinze {
+  h-jinze {
+    display: inline;
+  }
+}
+
+%han-text-emphasis-pf {
+  #{const.$HAN-JS-RENDERED-CLASS} & {
+    padding-bottom: auto;
+    border-bottom-width: 0;
+  }
+
+  // 1
+  .no-textemphasis & {
+    line-height: 2;
+
+    h-char {
+      // position
+      position: relative;
+      // typography
+      font-style: inherit;
+
+      &:after {
+        @include mixin.han-typo-reset;
+        @include mixin.han-scale-center(0.5);
+        // position
+        position: absolute;
+        left: 50%;
+        top: 0;
+        margin-left: -250%;
+        overflow: hidden;
+        // box
+        display: inline-block;
+        height: 1em;
+        width: 500%;
+        // typography
+        line-height: 1;
+        text-align: center;
+        text-indent: 0;
+        // 2
+        font-family: Georgia, 'Times New Roman', Arial !important;
+      }
+    }
+  }
+}
+
+// 3
+%han-text-emphasis-skip {
+  h-char.punct,
+  h-char.biaodian {
+    @include mixin.han-text-emphasis-internal(none);
+
+    .no-textemphasis &:after {
+      content: none !important;
+    }
+  }
+}
+
+em {
+  &:lang(zh) {
+    @include mixin.han-text-emphasis-pf;
+  }
+
+  &:lang(ja) {
+    @include mixin.han-text-emphasis-pf(const.$HAN-TEXT-EMPHASIS-POSI-JA, const.$HAN-TEXT-EMPHASIS-MARK-JA);
+  }
+}
+
+// * Simple and complex ruby polyfill
+// *
+@include meta.load-css('h-ruby');
+
+// * Punctuation rules (禁則)
+// *
+h-jinze,
+h-word {
+  // box
+  display: inline-block;
+  text-indent: 0;
+}

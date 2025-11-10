@@ -1,0 +1,141 @@
+@use '../api';
+@use '../locale/const';
+@use '../typography/var';
+@use '../var/default';
+
+/**
+ * Well-knit sections for articles
+ */
+
+#{var.$han-article} {
+  // typography
+  line-height: default.$han-article-line-height;
+
+  @if (default.$han-article-justify) {
+    & {
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+
+    p,
+    li {
+      text-align: justify;
+      text-justify: inter-ideograph;
+    }
+  }
+
+  // * Address well-knit sections in articles.
+  // *
+  %han-well-knit-section {
+    margin-top: -1em;
+  }
+
+  #{api.han-header-i()} {
+    + blockquote,
+    + p,
+    + ol,
+    + ul,
+    + h6,
+    + section > h6:first-child,
+    + section > p:first-child,
+    + section > ol:first-child,
+    + section > ul:first-child,
+    + section > blockquote:first-child {
+      @extend %han-well-knit-section;
+    }
+  }
+
+  #{api.han-header-i(1, 5)} {
+    + h5,
+    + section > h5:first-child {
+      @extend %han-well-knit-section;
+    }
+  }
+
+  #{api.han-header-i(1, 4)} {
+    + h4,
+    + section > h4:first-child {
+      @extend %han-well-knit-section;
+    }
+  }
+
+  #{api.han-header-i(1, 3)} {
+    + h3,
+    + section > h3:first-child {
+      @extend %han-well-knit-section;
+    }
+  }
+
+  #{api.han-header-i(1, 2)} {
+    + h2,
+    + section > h2:first-child {
+      @extend %han-well-knit-section;
+    }
+  }
+}
+
+// * Overwrite the default normalization of indent alignment
+// *
+@if (default.$han-indent !=const.$HAN-INDENT) {
+  ol,
+  ul {
+    padding-left: default.$han-indent;
+  }
+
+  figure,
+  blockquote {
+    margin-left: default.$han-indent;
+    margin-right: default.$han-indent;
+  }
+}
+
+// * Position poem-like paragraphs with `em`-unit (Hanzi),
+// * in pursuit of alignments.
+// *
+p.poem-like,
+.poem-like p {
+  margin-left: default.$han-indent;
+
+  @media only screen and (max-width: default.$han-mobile-device-width) {
+    margin-left: default.$han-indent-md;
+  }
+}
+
+// * 1. Different alignment in different situations.
+// * 2. Blockquotes in blockquotes (opinionated).
+// *
+blockquote {
+  // 1
+  #{var.$han-article} & {
+    margin-right: 0;
+
+    @media only screen and (max-width: default.$han-mobile-device-width) {
+      margin-left: default.$han-indent-md;
+    }
+  }
+
+  // 1
+  figure & {
+    margin: 0;
+  }
+
+  // 2
+  blockquote & {
+    margin-left: default.$han-indent * 0.5;
+    margin-right: default.$han-indent * 0.5;
+
+    #{var.$han-article} & {
+      margin-right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: default.$han-mobile-device-width) {
+  blockquote,
+  figure {
+    margin-left: default.$han-indent-md;
+    margin-right: default.$han-indent-md;
+  }
+}

@@ -1,0 +1,55 @@
+@use 'sass:meta';
+@use 'locale/const';
+@use 'locale/mixin';
+@use 'typography/var';
+@use 'var/default';
+
+/*  Global
+   -------- */
+
+@if (default.$han-line-height !=const.$HAN-LINE-HEIGHT) {
+  #{var.$han-root} {
+    line-height: default.$han-line-height;
+  }
+}
+
+// * Styles for alternative voice and variables when
+// * Kaiti (cursive) isn't supported.
+// *
+i,
+var {
+  .no-kaiti & {
+    // box
+    padding-bottom: 0.05em;
+    // style
+    border-bottom: 3px double lightgrey;
+  }
+}
+
+// * Zhuyin ruby size
+// *
+@if (default.$han-zhuyin-size !=const.$HAN-ZHUYIN-SIZE) {
+  ruby.zhuyin,
+  ruby.mps {
+    @include mixin.han-scale(default.$han-zhuyin-size / 0.5, 'left center');
+  }
+
+  [zhuyin] h-zhuyin > * {
+    @include mixin.han-scale(default.$han-zhuyin-size);
+  }
+}
+
+/*  Section-wise arrangement
+   -------------------------- */
+
+@include meta.load-css('section/well-knit');
+@include meta.load-css('section/counter');
+
+/*  Line composition
+   ------------------ */
+
+@include meta.load-css('inline/em');
+@include meta.load-css('inline/hws');
+@include meta.load-css('inline/hanging');
+@include meta.load-css('inline/jiya');
+@include meta.load-css('inline/subst');

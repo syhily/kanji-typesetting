@@ -1,0 +1,18 @@
+@use 'default';
+
+// *!
+// * **WARNING**
+// * Unless you knew well enough, *nothing* below should
+// * be modified!
+// *
+
+$han-webfont: url(#{default.$han-font-path}han.woff2) format('woff2') !default;
+
+$han-space-webfont: url(#{default.$han-font-path}han-space.woff2) format('woff2') !default;
+
+$hanging-hant: 'h-char.bd-hangable:lang(zh), h-char.bd-hangable:lang(zh-Hant), h-char.bd-hangable:lang(zh-TW), h-char.bd-hangable:lang(zh-HK), ';
+
+$_hanging-hans: 'h-char.bd-hangable:lang(zh-Hans), h-char.bd-hangable:lang(zh-CN), ';
+
+$han-hanging-selector: if(default.$han-hanging-hant, $hanging-hant, '') +
+  if(default.$han-hanging-hans, $_hanging-hans, '') + if(default.$han-hanging-ja, 'h-char.bd-hangable:lang(ja)', '');
