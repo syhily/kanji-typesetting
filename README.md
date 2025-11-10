@@ -63,13 +63,13 @@ Kanji Typesetting consists of two parts:
 Since Kanji Typesetting ships with precompiled CSS, you can import it directly from the package:
 
 ```js
-import 'kanji-typesetting/style'
+import 'kanji-typesetting/style.css'
 ```
 
 or in a CSS file:
 
 ```css
-@import 'kanji-typesetting/style';
+@import 'kanji-typesetting/style.css';
 ```
 
 This works with most modern bundlers and frameworks, including **Vite**, **Next.js**, **Nuxt**, and **Webpack**.
@@ -81,7 +81,7 @@ This works with most modern bundlers and frameworks, including **Vite**, **Next.
 Example:
 
 ```css
-@import 'kanji-typesetting/style';
+@import 'kanji-typesetting/style.css';
 
 :root {
   --han-line-height: 1.6;
@@ -97,7 +97,7 @@ Import the JavaScript API in your entry script or component:
 
 ```js
 import Han from 'kanji-typesetting'
-import 'kanji-typesetting/style'
+import 'kanji-typesetting/style.css'
 ```
 
 Create a Han instance and render:
