@@ -2,6 +2,24 @@
   "name": "kanji-typesetting",
   "type": "module",
   "version": "1.0.0",
+  "description": "A JavaScript library for Japanese/Chinese typography and typesetting",
+  "author": "syhily",
+  "license": "MIT",
+  "homepage": "https://github.com/syhily/kanji-typesetting#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syhily/kanji-typesetting.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syhily/kanji-typesetting/issues"
+  },
+  "keywords": [
+    "typography",
+    "typesetting",
+    "japanese",
+    "chinese",
+    "kanji"
+  ],
   "exports": {
     ".": {
       "types": "./dist/main.d.ts",
