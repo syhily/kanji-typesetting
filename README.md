@@ -27,7 +27,7 @@ Compared with the original Han-CSS, Kanji Typesetting introduces several major u
 
 Kanji Typesetting is still under active development.
 Most features are functional, but due to the scope of the refactor and incomplete testing, results may differ slightly from the original Han-CSS.
-You can see it in production on [sharzy.in](https://sharzy.in/blog), which fully adopts Han-CSS-Q.
+You can see it in production on [且听书吟](https://yufan.me), which fully adopts kanji-typesetting.
 
 ---
 
@@ -39,14 +39,6 @@ Install Kanji Typesetting from npm:
 yarn add kanji-typesetting
 # or
 npm install kanji-typesetting
-```
-
-Alternatively, install directly from GitHub:
-
-```bash
-yarn add git+https://github.com/syhily/kanji
-# or
-npm install git+https://github.com/syhily/kanji
 ```
 
 ---
@@ -160,19 +152,3 @@ See the [original documentation](https://hanzi.pro/manual/yangshi_biaozhunhua) f
 
 It also defines refined font stacks for consistent rendering across platforms.
 See [text design documentation](https://hanzi.pro/manual/wenzisheji) for more details.
-
----
-
-✅ **Summary**
-
-**Kanji Typesetting** (npm: [`kanji-typesetting`](https://www.npmjs.com/package/kanji-typesetting))
-is a modern, production-ready reimplementation of **Han-CSS**, continuing from **Han-CSS-Q** with:
-
-- ES Module–based architecture
-- Server-side rendering support
-- Precompiled CSS (no Sass required)
-- Modern JavaScript API
-- Simplified configuration
-- npm distribution
-
-Kanji Typesetting aims to deliver a **clean**, **modular**, and **production-ready** framework for high-quality Han character web typography.
