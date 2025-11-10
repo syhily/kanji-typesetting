@@ -1,4 +1,4 @@
-# Kanji Typesetting (formerly Han-CSS-Q)
+# Kanji Typesetting
 
 [**Kanji Typesetting**](https://github.com/syhily/kanji-typesetting) (npm: [`kanji-typesetting`](https://www.npmjs.com/package/kanji-typesetting))
 is a modernized reimplementation of [**Han-CSS**](https://github.com/ethantw/Han), a typesetting framework for Chinese and other Han-script web pages.
@@ -9,9 +9,7 @@ Kanji Typesetting provides a beautiful, standardized environment for Han charact
 The original Han-CSS project, however, has not been actively maintained for years.
 Its build system depends on an outdated version of Gulp, the code does not follow modern JavaScript conventions, and it lacks features such as **server-side rendering (SSR)** support.
 
-**Han-CSS-Q** was created as an effort to modernize Han-CSS.
-**I (syhily) have now forked Han-CSS-Q again**, continuing its modernization under the new name **Kanji Typesetting**, distributed via npm as [`kanji-typesetting`](https://www.npmjs.com/package/kanji-typesetting).
-This fork inherits all improvements from Han-CSS-Q while further enhancing **usability**, **modularity**, and **compatibility** with modern front-end ecosystems.
+I (syhily) have now forked Han-CSS again, continuing its modernization under the new name **Kanji Typesetting**, distributed via npm as [`kanji-typesetting`](https://www.npmjs.com/package/kanji-typesetting).
 
 ---
 
